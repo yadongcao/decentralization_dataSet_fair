@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Signin from './Signin.js';
 import DataSetList from './DataSetList.js'
 import CreateNewProblem from './CreateNewProblem.js'
+import UploadDataSet from './UploadDataSet.js'
 import UserGroupList from './UserGroupList.js'
 import {connect} from 'react-redux'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -61,6 +62,9 @@ class App extends Component {
                 </TabPanel>
                 <TabPanel>
                   <CreateNewProblem/>
+                </TabPanel>
+                <TabPanel>
+                  <UploadDataSet/>
                 </TabPanel>
               </Tabs>
               <DataSetList />
