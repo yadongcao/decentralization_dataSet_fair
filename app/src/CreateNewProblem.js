@@ -3,6 +3,8 @@ import TextField from '@material-ui/core/TextField';
 import './CreateNewProblem.css';
 import Modal from 'react-modal';
 import ClipLoader from "react-spinners/ClipLoader";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faPlus} from '@fortawesome/free-solid-svg-icons';
 const customStyles = {
   content : {
     top                   : '50%',
@@ -20,7 +22,7 @@ export default class CreateNewProblem extends Component {
     this.state = {
         image:null,
         showModal: false,
-        validForm:false
+        modalMessage:""
     }
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -40,10 +42,20 @@ export default class CreateNewProblem extends Component {
     });
     console.log(event.target.encrypt.checked)
     
-    var state={showModal:true,validForm:valid};
-    this.setState(state);
     if (valid){
+      var state={showModal:true,modalMessage:""};
+      this.setState(state);
       //radiks async await
+
+      /*then
+      this.setState({modalMessage:"Create New Problem Success"})
+      setTimeout(function(){
+        this.setState({showModal:false,modalMessage:""})
+      },2000)
+      */
+    }else{
+      var state={showModal:true,modalMessage:"Unable to upload, there is missing field"};
+      this.setState(state);
     }
   }
   handleCloseModal () {
@@ -72,9 +84,16 @@ export default class CreateNewProblem extends Component {
                 <input type="checkbox" name="encrypt"/>
                 <span className="slider round"></span>
             </label></td></tr>
-            <tr><td>Logo</td><td>{
-            this.state.image !=null? <div><img src={this.state.image} width="100px" height="100px"/><br/></div>:null
-            }<input type="file" id="img" accept="image/*" name="image" onChange={this.onImageChange}/><br/>
+            <tr><td>Logo</td><td>
+              <div style={{textAlign:"center",backgroundColor:"#ebf2f5",borderWidth:"5px",borderColor:"#ebf2f5"}}>
+                <br/><FontAwesomeIcon icon={faPlus} color="#868786" />
+              <br/><br/>
+              {
+            this.state.image !=null? <div><img src={this.state.image} width="100px" height="100px"/><br/></div>:<font color="#494c4d">上传 logo</font>
+            }
+            <br/><br/>
+            <input type="file" id="img" accept="image/*" name="image" onChange={this.onImageChange}/><br/>
+            </div>
             </td></tr>
             <tr><td></td><td><input type="submit" value="submit"/></td></tr>
           </tbody>
@@ -88,8 +107,8 @@ export default class CreateNewProblem extends Component {
       contentLabel="Example Modal">
       <div>I am a modal</div>
       {
-        this.state.validForm?<ClipLoader size={150}
-        color={"#123abc"}/>:<div>Unable to upload, there is missing field</div>
+        this.state.modalMessage==""?<ClipLoader size={150}
+        color={"#123abc"}/>:<div>{this.state.modalMessage}</div>
       }
       <button onClick={this.handleCloseModal}>Close</button>
       </Modal>

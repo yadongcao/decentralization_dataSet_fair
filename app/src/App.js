@@ -3,6 +3,7 @@ import Signin from './Signin.js';
 import DataSetList from './DataSetList.js'
 import CreateNewProblem from './CreateNewProblem.js'
 import UploadDataSet from './UploadDataSet.js'
+import HotTopic from './HotTopic.js'
 import UserGroupList from './UserGroupList.js'
 import {connect} from 'react-redux'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -28,7 +29,7 @@ class App extends Component {
 
   constructor(){
     super()
-
+    
   }
 
   handleSignIn(e){
@@ -58,7 +59,7 @@ class App extends Component {
                   <Tab>我的</Tab>
                 </TabList>
                 <TabPanel>
-                  <h2>Any content 1</h2>
+                  <HotTopic/>
                 </TabPanel>
                 <TabPanel>
                   <CreateNewProblem/>
