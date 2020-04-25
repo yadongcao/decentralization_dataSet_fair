@@ -46,8 +46,13 @@ export default class UploadDataSet extends Component {
       var state={showModal:true,modalMessage:""};
       this.setState(state);
       //radiks async await
-
-      /*then
+      /*
+      et.collection.value=>数据集
+      et.description.value=>介绍
+      et.problem.value=>问题域
+      et.file.value=>File
+      
+      then
       this.setState({modalMessage:"Create New Problem Success"})
       setTimeout(function(){
         this.setState({showModal:false,modalMessage:""})
@@ -78,7 +83,7 @@ export default class UploadDataSet extends Component {
       <table >
         <tbody>
           <tr><td>数据集</td><td><TextField placeholder="请输入数据集" name="collection" style={{width:"100%"}}></TextField></td></tr>
-          <tr><td>介绍</td><td><TextField placeholder="请介绍数据集基本信息" name="description" style={{width:"100%"}}></TextField></td></tr>
+          <tr><td>介绍</td><td><textarea placeholder="请介绍数据集基本信息" name="description" style={{width:"100%"}}></textarea></td></tr>
           <tr><td>问题域</td><td><select name="problem">
             {this.state.problemOptions.forEach(function(z){
               return <option value={z}>z</option>

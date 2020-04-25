@@ -45,9 +45,13 @@ export default class CreateNewProblem extends Component {
     if (valid){
       var state={showModal:true,modalMessage:""};
       this.setState(state);
+      
       //radiks async await
+      /*et.problem.value =>问题域
+      et.description.value=>介绍
+      et.image.value=>Logo
+      et.encrypt.checked=>Encypt (true/false)
 
-      /*then
       this.setState({modalMessage:"Create New Problem Success"})
       setTimeout(function(){
         this.setState({showModal:false,modalMessage:""})
@@ -78,7 +82,7 @@ export default class CreateNewProblem extends Component {
       <table >
         <tbody>
           <tr><td>问题域</td><td><TextField placeholder="请输入问题域题目" name="problem" style={{width:"100%"}}></TextField></td></tr>
-          <tr><td>介绍</td><td><TextField placeholder="请介绍问题域基本信息" name="description" style={{width:"100%"}}></TextField></td></tr>
+          <tr><td>介绍</td><td><textarea placeholder="请介绍问题域基本信息" name="description" style={{width:"100%"}}></textarea></td></tr>
           <tr><td>是否加密</td><td>
               <label className="switch">
                 <input type="checkbox" name="encrypt"/>
