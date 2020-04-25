@@ -14,6 +14,8 @@ import {
 } from 'blockstack';
 
 import { configure,User, getConfig} from 'radiks-gavin-test';
+import user from 'radiks-gavin-test/lib/models/user';
+import IdTag from './IdTag.js';
 
 
 const appConfig = new AppConfig(['store_write', 'publish_data'])
@@ -44,7 +46,12 @@ class App extends Component {
   render() {
     return (
       <div className="site-wrapper">
-
+        <nav class="navbar navbar-dark bg-dark navbar-static-top">
+          <a class="navbar-brand" href="https://blockstack.org">
+            <img src="dlakers.png" alt="" style={{width:100}}/>
+          </a>
+          {userSession.isUserSignedIn()? <IdTag user={userSession.loadUserData().username} />:null}
+        </nav>
           { !userSession.isUserSignedIn() ?
             <div className="site-wrapper-inner">
               <Signin userSession={userSession} handleSignIn={ this.handleSignIn } />
@@ -68,7 +75,6 @@ class App extends Component {
                   <UploadDataSet/>
                 </TabPanel>
               </Tabs>
-              <DataSetList />
             </div>
           }
         <br/>
