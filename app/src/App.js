@@ -4,9 +4,11 @@ import DataSetList from './DataSetList.js'
 import CreateNewProblem from './CreateNewProblem.js'
 import UploadDataSet from './UploadDataSet.js'
 import HotTopic from './HotTopic.js'
+import My from './My.js'
 import UserGroupList from './UserGroupList.js'
 import {connect} from 'react-redux'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+
 import 'react-tabs/style/react-tabs.css';
 import {
   UserSession,
@@ -46,11 +48,11 @@ class App extends Component {
   render() {
     return (
       <div className="site-wrapper">
-        <nav class="navbar navbar-dark bg-dark navbar-static-top">
-          <a class="navbar-brand" href="https://blockstack.org">
+        <nav className="navbar navbar-dark bg-dark navbar-static-top">
+          <a className="navbar-brand" href="https://blockstack.org">
             <img src="dlakers.png" alt="" style={{width:100}}/>
           </a>
-          {userSession.isUserSignedIn()? <IdTag user={userSession.loadUserData().username} />:null}
+          {userSession.isUserSignedIn()? <IdTag userSession={userSession} />:null}
         </nav>
           { !userSession.isUserSignedIn() ?
             <div className="site-wrapper-inner">
@@ -73,6 +75,9 @@ class App extends Component {
                 </TabPanel>
                 <TabPanel>
                   <UploadDataSet/>
+                </TabPanel>
+                <TabPanel>
+                  <My/>
                 </TabPanel>
               </Tabs>
             </div>

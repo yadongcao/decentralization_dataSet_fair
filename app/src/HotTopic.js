@@ -3,7 +3,7 @@ import {fries} from './HotTopic_demo_images';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faThumbsUp,faCommentDots} from '@fortawesome/free-regular-svg-icons';
-import {faDatabase,faCloudDownloadAlt} from '@fortawesome/free-solid-svg-icons';
+import {faDatabase,faCloudDownloadAlt,faAngleDoubleLeft,faAngleDoubleRight} from '@fortawesome/free-solid-svg-icons';
 import "./HotTopic.css";
 const list = [
   { name: 'item1',logo:fries },
@@ -31,17 +31,19 @@ export const Menu = (list, selected) =>
   });
  
  
-const Arrow = ({ text, className }) => {
+const PreArrow = () => {
   return (
-    <div
-      className={className}
-    >{text}</div>
+    <FontAwesomeIcon icon={faAngleDoubleLeft}/>
+  );
+};
+const NextArrow = () => {
+  return (
+    <FontAwesomeIcon icon={faAngleDoubleRight}/>
   );
 };
  
- 
-const ArrowLeft = Arrow({ text: '<', className: 'arrow-prev' });
-const ArrowRight = Arrow({ text: '>', className: 'arrow-next' });
+const ArrowLeft = PreArrow();
+const ArrowRight = NextArrow();
  
 const selected = 'item1';
 export default class HotTopic extends Component {
@@ -83,10 +85,10 @@ export default class HotTopic extends Component {
         /></span><span>{p.comments}</span>
         <br/><br/><ScrollMenu data={Menu(p.dataset,selected)}
         arrowLeft={ArrowLeft}
-          arrowRight={ArrowRight}
-          selected={selected}
-          />
-          </div>)
+        arrowRight={ArrowRight}
+        selected={selected}
+        />
+        </div>)
       })
     }</div>
     );
