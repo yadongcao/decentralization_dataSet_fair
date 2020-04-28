@@ -5,6 +5,8 @@ import Modal from 'react-modal';
 import ClipLoader from "react-spinners/ClipLoader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFolder} from '@fortawesome/free-regular-svg-icons';
+import Media from './models/Media';
+import DataSet from './models/DataSet';
 const customStyles = {
   content : {
     top                   : '50%',
@@ -35,7 +37,9 @@ export default class UploadDataSet extends Component {
     event.preventDefault();
     let et = event.target;
     var valid =true;
-    [et.collection.value,et.description.value,et.problem.value,et.file.value].forEach(function(a){
+    [et.collection.value,et.description.value,
+      //et.problem.value,
+      et.file.value].forEach(function(a){
       console.log(a,typeof a);
       if (a==null || a==""){
         valid =false;
@@ -45,19 +49,31 @@ export default class UploadDataSet extends Component {
     if (valid){
       var state={showModal:true,modalMessage:""};
       this.setState(state);
-      //radiks async await
-      /*
-      et.collection.value=>数据集
-      et.description.value=>介绍
-      et.problem.value=>问题域
-      et.file.value=>File
+      let reader = new FileReader();
       
-      then
-      this.setState({modalMessage:"Create New Problem Success"})
-      setTimeout(function(){
-        this.setState({showModal:false,modalMessage:""})
-      },2000)
-      */
+      reader.onload = async(e) => {  
+        const mediaAttribute = {
+          Data:e.target.result
+        }
+        const m = new Media(mediaAttribute);
+        await m.save();
+        const attributes = {
+          Title: et.collection.value,
+          Description: et.description.value,
+          problemAreaId:et.problem.value,
+          fileUrl:m._id,
+          createdBy: this.props.user,
+          createdAt:2
+        }
+        const d = new DataSet(attributes)
+        await d.save();
+        this.setState({modalMessage:"Upload dataset success"})
+        const _this =this;
+        setTimeout(function(){
+          _this.setState({showModal:false,modalMessage:""})
+        },2000)
+      };
+      reader.readAsDataURL(et.file.files[0]);
     }else{
       var state={showModal:true,modalMessage:"Unable to upload, there is missing field"};
       this.setState(state);
@@ -99,7 +115,6 @@ export default class UploadDataSet extends Component {
               <br/><br/>
               <input type="file" id="file" name="file" onChange={this.onFileChange}/><br/>
               </div>
-            
             </td></tr>
           <tr><td></td><td><input type="submit" value="submit"/></td></tr>
           </tbody>
@@ -111,7 +126,6 @@ export default class UploadDataSet extends Component {
       isOpen={this.state.showModal}
       style={customStyles}
       contentLabel="Example Modal">
-      <div>I am a modal</div>
       {
         this.state.modalMessage==""?<ClipLoader size={150}
         color={"#123abc"}/>:<div>this.state.modalMessage</div>

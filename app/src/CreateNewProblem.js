@@ -5,6 +5,9 @@ import Modal from 'react-modal';
 import ClipLoader from "react-spinners/ClipLoader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
+import Problem from './models/Problem';
+
+import { User,getConfig} from 'radiks';
 const customStyles = {
   content : {
     top                   : '50%',
@@ -30,7 +33,7 @@ export default class CreateNewProblem extends Component {
   componentWillMount() {
     Modal.setAppElement('body');
   }
-  handleOpenModal (event) {
+  async handleOpenModal(event){
     event.preventDefault();
     let et = event.target;
     var valid =true;
@@ -45,18 +48,22 @@ export default class CreateNewProblem extends Component {
     if (valid){
       var state={showModal:true,modalMessage:""};
       this.setState(state);
-      
-      //radiks async await
-      /*et.problem.value =>问题域
-      et.description.value=>介绍
-      et.image.value=>Logo
-      et.encrypt.checked=>Encypt (true/false)
-
+     
+      const attributes = {
+        Title: et.problem.value,
+        Description: et.description.value,
+        logoUrl:this.state.image,
+        createdBy: this.props.user,
+        createdAt:2
+      }
+      const p = new Problem(attributes);
+      await p.save();
       this.setState({modalMessage:"Create New Problem Success"})
+      var _this= this;
       setTimeout(function(){
-        this.setState({showModal:false,modalMessage:""})
+        _this.setState({showModal:false,modalMessage:""})
       },2000)
-      */
+      
     }else{
       var state={showModal:true,modalMessage:"Unable to upload, there is missing field"};
       this.setState(state);
@@ -71,6 +78,7 @@ export default class CreateNewProblem extends Component {
       reader.onload = (e) => {  
         this.setState({image: e.target.result});
       };
+      console.log("event.target.files[0",event.target.files[0])
       reader.readAsDataURL(event.target.files[0]);
     }
   }
@@ -109,7 +117,6 @@ export default class CreateNewProblem extends Component {
       isOpen={this.state.showModal}
       style={customStyles}
       contentLabel="Example Modal">
-      <div>I am a modal</div>
       {
         this.state.modalMessage==""?<ClipLoader size={150}
         color={"#123abc"}/>:<div>{this.state.modalMessage}</div>

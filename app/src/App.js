@@ -15,7 +15,7 @@ import {
   AppConfig
 } from 'blockstack';
 
-import { configure,User, getConfig} from 'radiks-gavin-test';
+import { configure,User, getConfig} from 'radiks';
 import user from 'radiks-gavin-test/lib/models/user';
 import IdTag from './IdTag.js';
 
@@ -71,7 +71,7 @@ class App extends Component {
                   <HotTopic/>
                 </TabPanel>
                 <TabPanel>
-                  <CreateNewProblem/>
+                  <CreateNewProblem user={userSession.loadUserData().username}/>
                 </TabPanel>
                 <TabPanel>
                   <UploadDataSet/>

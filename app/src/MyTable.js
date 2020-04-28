@@ -7,13 +7,17 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faDownload} from '@fortawesome/free-solid-svg-icons';
+
 const Styles = styled.div`
   .pagination {
     padding: 0.5rem;
   }
 `
 
-function Table({ columns, data }) {
+function Table({ columns, data,typez }) {
+  console.log("type",typez,columns)
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
@@ -37,11 +41,11 @@ function Table({ columns, data }) {
     {
       columns,
       data,
-      initialState: { pageIndex: 2 },
+      initialState: { pageIndex: 0 },
     },
     usePagination
   )
-
+  
   // Render the UI for your table
   return (
     <>
@@ -61,8 +65,15 @@ function Table({ columns, data }) {
             return (
               <TableRow {...row.getRowProps()}>
                 {row.cells.map((cell,ii) => {
-                  if (ii==5){
-                    return <TableCell {...cell.getCellProps()}><a href={cell.render('Cell')} style={{color:"blue"}}>取消</a></TableCell>
+                  console.log("cell",cell);
+                  if (ii==0){
+                    if (typez=="dataset"){
+                      return <TableCell {...cell.getCellProps()}><a href={"/download?fileUrl="+cell.value} target="_blank" style={{width:100,height:100}}><FontAwesomeIcon icon={faDownload} style={{width:100}}   style={{cursor:"pointer"}} color="#0f0f0f"/></a></TableCell>
+                    }else{
+                      return <TableCell {...cell.getCellProps()}><img src={cell.value} style={{width:100}}/></TableCell>
+                    }
+                  }else if (ii==6){
+                    return <TableCell {...cell.getCellProps()}><a href={cell.value} style={{color:"blue"}}>取消</a></TableCell>
                   }else{
                     return <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>
                   }     
@@ -128,12 +139,12 @@ export default class MyTable extends Component {
 
   render() {
 
-    const{columns,data} = this.props;
+    const{columns,data,typez} = this.props;
     return (
       <Styles>
       <div>
         <CssBaseline />
-        <Table columns={columns} data={data} className="-striped -highlight" />
+        <Table columns={columns} data={data} typez={typez} className="-striped -highlight" />
       </div>
       </Styles>
     )
