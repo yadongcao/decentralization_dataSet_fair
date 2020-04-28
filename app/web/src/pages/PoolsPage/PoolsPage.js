@@ -1,11 +1,11 @@
-import PoolsLayout from 'src/layouts/PoolsLayout'
+import AppLayout from 'src/layouts/AppLayout'
 import PoolsCell from 'src/components/PoolsCell'
 
 const PoolsPage = () => {
   return (
-    <PoolsLayout>
+    <AppLayout>
       <PoolsCell />
-    </PoolsLayout>
+    </AppLayout>
   )
 }
 
