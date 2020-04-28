@@ -14,7 +14,8 @@ yarn install
 
 ### 开发配置
 
-- 由于CORS，开发环境需要在 node_modules/@redwoodjs/core/config/webpack.development.js 中添加以下配置：
+- 由于CORS，开发环境需要在 node_modules/@redwoodjs/core/config/webpack.development.js 中的devServer添加以下配置：
+
 
 ```js
   headers: {
@@ -58,7 +59,7 @@ If you've made changes to the schema run `yarn redwood db save` to generate a mi
 ##
 **Features:**
  - 问题域管理（群组）
- - 数据集管理 (包括下载、评论)
+ - 数据集管理 (包括上传 、下载、评论)
  - 定向隐私分享
  - 数据使用情况统计（TODO）
  - 数据模板（TODO）
