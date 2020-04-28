@@ -1,21 +1,28 @@
-# Redwood
->**HEADS UP:** RedwoodJS is _NOT_ ready for use in Production. It relies heavily on Prisma2, which is currently in testing with an expected production release coming soon. See status at ["Is Prisma2 Ready?"](https://isprisma2ready.com)
+# DLakes - Redwood Edition
+>**HEADS UP:** 基于Redwood.js 开发，目前使用了部分核心设计
+api端并未使用，后续考虑结合lambda 重构 radiks-server等
 
-## Getting Started
-- [Redwoodjs.com](https://redwoodjs.com): home to all things RedwoodJS.
-- [Tutorial](https://redwoodjs.com/tutorial/welcome-to-redwood): getting started and complete overview guide.
-- [Docs](https://redwoodjs.com/docs/introduction): using the Redwood Router, handling assets and files, list of command-line tools, and more.
-- [Redwood Community](https://community.redwoodjs.com): get help, share tips and tricks, and collaborate on everything about RedwoodJS.   
 
 ### Setup
 
-We use Yarn as our package manager. To get the dependencies installed, just do this in the root directory:
+- 请使用yarn （可以配置taobao npm 源）
 
 ```terminal
 yarn install
 ```
+> 如果下载缓慢可能是因为@prisma/sdk 下载构建导致的，可以 npm -g 全局下载一下
 
-### Fire it up
+### 开发配置
+
+- 由于CORS，开发环境需要在 node_modules/@redwoodjs/core/config/webpack.development.js 中添加以下配置：
+
+```js
+  headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*',
+      'Access-Control-Allow-Methods': 'GET',
+    },
+```
 
 ```terminal
 yarn redwood dev
@@ -37,6 +44,22 @@ To create a development database:
 yarn redwood db up
 ```
 
+
+## 参考文档
+- [Redwoodjs.com](https://redwoodjs.com): home to all things RedwoodJS.
+- [Tutorial](https://redwoodjs.com/tutorial/welcome-to-redwood): getting started and complete overview guide.
+- [Docs](https://redwoodjs.com/docs/introduction): using the Redwood Router, handling assets and files, list of command-line tools, and more.
+- [Redwood Community](https://community.redwoodjs.com): get help, share tips and tricks, and collaborate on everything about RedwoodJS.
+
 This will read the schema definition in `api/prisma/schema.prisma` and generate a sqlite database in `api/prisma/dev.db`
 
 If you've made changes to the schema run `yarn redwood db save` to generate a migration, and `yarn redwood db up` to apply the migration/ generate a new ORM client.
+
+##
+**Features:**
+ - 问题域管理（群组）
+ - 数据集管理 (包括下载、评论)
+ - 定向隐私分享
+ - 数据使用情况统计（TODO）
+ - 数据模板（TODO）
+ - 解析插件化等（TODO）
