@@ -25,9 +25,15 @@ export default ({ userSession, isSingedIn }) => {
     setPerson(new Person(userSession.loadUserData().profile))
   }, [isSingedIn])
 
-  const handleSignIn = () => userSession.redirectToSignIn()
+  const handleSignIn = (event) => {
+    event.preventDefault()
+    userSession.redirectToSignIn()
+  }
 
-  const handleSignOut = () => userSession.signUserOut(window.location.origin)
+  const handleSignOut = (event) => {
+    event.preventDefault()
+    userSession.signUserOut(window.location.origin)
+  }
 
   return (
     <Flex alignItems="center">

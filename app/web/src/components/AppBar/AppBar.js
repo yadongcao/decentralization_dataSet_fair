@@ -15,7 +15,7 @@ export default ({ userSession, isSingedIn, logo }) => {
       }}
     >
       <Box flex="1 1 auto">
-        <Link to={routes.home()}>
+        <Link to={routes.pools()}>
           <Image
             src={logo}
             sx={{

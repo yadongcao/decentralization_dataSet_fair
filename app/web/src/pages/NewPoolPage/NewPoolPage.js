@@ -1,11 +1,11 @@
-import PoolsLayout from 'src/layouts/PoolsLayout'
+import AppLayout from 'src/layouts/AppLayout'
 import NewPool from 'src/components/NewPool'
 
 const NewPoolPage = () => {
   return (
-    <PoolsLayout>
+    <AppLayout>
       <NewPool />
-    </PoolsLayout>
+    </AppLayout>
   )
 }
 
