@@ -14,18 +14,7 @@ const Routes = () => {
     <Router>
       {/* <Route path="/" page={HomePage} name="home" /> */}
       {/* 热门页，即首页 */}
-      <Route path="/" page={PoolsPage} name="pools" />
-      <Route path="/pools/new" page={NewPoolPage} name="newPool" />
-      <Route path="/pools/{id:Int}/edit" page={EditPoolPage} name="editPool" />
-      <Route path="/pools/{id:Int}" page={PoolPage} name="pool" />
-      <Route path="/datasets/new" page={NewDatasetPage} name="newDataset" />
-      <Route
-        path="/datasets/{id:Int}/edit"
-        page={EditDatasetPage}
-        name="editDataset"
-      />
-      <Route path="/datasets/{id:Int}" page={DatasetPage} name="dataset" />
-      <Route path="/datasets" page={DatasetsPage} name="datasets" />
+      <Route path="/" page={HomePage} name="home" />
       <Route notfound page={NotFoundPage} />
     </Router>
   )

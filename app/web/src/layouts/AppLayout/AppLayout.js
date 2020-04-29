@@ -6,7 +6,7 @@ import AppBar from 'src/components/AppBar'
 import Footer from 'src/components/Footer'
 
 // init app
-const appConfig = new AppConfig()
+const appConfig = new AppConfig(['store_write', 'publish_data'])
 const userSession = new UserSession({ appConfig: appConfig })
 configure({
   apiServer: 'http://161.189.86.182:1260',
@@ -21,7 +21,8 @@ const AppLayout = ({ children }) => {
   const authRadiksAsync = async (userSession) => {
     try {
       console.log('auth')
-      console.log('in 1')
+      console.log('CHECK:', userSession.isUserSignedIn())
+      if (userSession.isUserSignedIn()) console.log(userSession.loadUserData())
       await userSession.handlePendingSignIn().then((userData) => {
         window.history.replaceState({}, document.title, '/')
         console.log('pending session : ', userSession)
