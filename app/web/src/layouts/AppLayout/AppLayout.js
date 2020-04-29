@@ -18,15 +18,23 @@ const AppLayout = ({ children }) => {
   console.log(userSession)
   const [isSingedIn, setIsSingedIn] = useState(userSession.isUserSignedIn())
 
-  const authRadiksAsync = async (uSession) => {
-    console.log('auth')
-    console.log('pending session : ', uSession)
+  const authRadiksAsync = async (userSession) => {
+    try {
+      console.log('auth')
+      console.log('in 1')
+      await userSession.handlePendingSignIn().then((userData) => {
+        window.history.replaceState({}, document.title, '/')
+        console.log('pending session : ', userSession)
+        // this.setState({ userData: userData })
+        console.log(userData)
+      })
+      const currentUser = await User.createWithCurrentUser()
+      console.log('1', currentUser)
 
-    await uSession.handlePendingSignIn()
-
-    await User.createWithCurrentUser()
-
-    setIsSingedIn(true)
+      setIsSingedIn(true)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   // run once componentDidMount
