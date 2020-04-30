@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFolder} from '@fortawesome/free-regular-svg-icons';
 import Media from './models/Media';
 import DataSet from './models/DataSet';
+import moment from 'moment';
 const customStyles = {
   content : {
     top                   : '50%',
@@ -63,7 +64,7 @@ export default class UploadDataSet extends Component {
           problemAreaId:et.problem.value,
           fileUrl:m._id,
           createdBy: this.props.user,
-          createdAt:2
+          createdAt:moment().format('MMMM Do YYYY, h:mm:ss a')
         }
         const d = new DataSet(attributes)
         await d.save();

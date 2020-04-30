@@ -16,15 +16,13 @@ import {
 } from 'blockstack';
 
 import { configure,User, getConfig} from 'radiks';
-import user from 'radiks-gavin-test/lib/models/user';
 import IdTag from './IdTag.js';
 
 
 const appConfig = new AppConfig(['store_write', 'publish_data'])
 const userSession = new UserSession({ appConfig: appConfig })
-console.log(userSession)
 configure({
-  apiServer: 'http://localhost:1260',
+  apiServer: 'http://161.189.86.182:1260',
   userSession
 });
 

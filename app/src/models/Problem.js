@@ -7,7 +7,7 @@ export default class Problem extends Model {
     Description: String,
     logoUrl: String,
     createdBy: String,
-    createdAt: Number,
+    createdAt: String,
     
   }
   static defaults = {

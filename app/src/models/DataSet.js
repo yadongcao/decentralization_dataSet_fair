@@ -8,7 +8,7 @@ export default class DataSet extends Model {
     problemAreaId:String,
     fileUrl: String,
     createdBy: String,
-    createdAt: Number
+    createdAt: String
   }
   static defaults = {
   }
