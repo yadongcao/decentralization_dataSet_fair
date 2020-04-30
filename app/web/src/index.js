@@ -15,9 +15,8 @@ const theme = {
 
 ReactDOM.render(
   <FatalErrorBoundary page={FatalErrorPage}>
-    <RedwoodProvider theme={theme}>
-      <Routes />
-    </RedwoodProvider>
+    {/* <RedwoodProvider theme={theme}> */}
+    <Routes />,{/* </RedwoodProvider> */}
   </FatalErrorBoundary>,
   document.getElementById('redwood-app')
 )
