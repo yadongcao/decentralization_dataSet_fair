@@ -6,7 +6,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
 import Problem from './models/Problem';
-
+import moment from 'moment';
 import { User,getConfig} from 'radiks';
 const customStyles = {
   content : {
@@ -54,7 +54,7 @@ export default class CreateNewProblem extends Component {
         Description: et.description.value,
         logoUrl:this.state.image,
         createdBy: this.props.user,
-        createdAt:2
+        createdAt: moment().format('MMMM Do YYYY, h:mm:ss a')
       }
       const p = new Problem(attributes);
       await p.save();
