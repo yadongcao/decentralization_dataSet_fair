@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import AppLayout from "./layouts/AppLayout";
 import MyTable from "./MyTable.js";
-import Problem from "./models/Problem.js";
-import DataSet from "./models/DataSet";
+import Pool from "./models/Pool.js";
+import DataSet from "./models/Dataset";
 export default class My extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +13,7 @@ export default class My extends Component {
   }
   async componentDidMount() {
     var datas = [];
-    await Promise.all([Problem.fetchList(), DataSet.fetchList()]).then(
+    await Promise.all([Pool.fetchList(), DataSet.fetchList()]).then(
       function (values) {
         values.forEach(function (value, i) {
           console.log("value", value);

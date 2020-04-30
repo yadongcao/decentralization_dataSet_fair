@@ -5,9 +5,8 @@ import Modal from "react-modal";
 import ClipLoader from "react-spinners/ClipLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import Problem from "./models/Problem";
+import Pool from "./models/Pool";
 import moment from "moment";
-import { User, getConfig } from "radiks";
 import AppLayout from "./layouts/AppLayout";
 
 const customStyles = {
@@ -39,7 +38,7 @@ export default class CreateNewProblem extends Component {
     event.preventDefault();
     let et = event.target;
     var valid = true;
-    [et.problem.value, et.description.value, et.image.value].forEach(function (
+    [et.Pool.value, et.description.value, et.image.value].forEach(function (
       a
     ) {
       console.log(a, typeof a);
@@ -54,15 +53,15 @@ export default class CreateNewProblem extends Component {
       this.setState(state);
 
       const attributes = {
-        Title: et.problem.value,
+        Title: et.Pool.value,
         Description: et.description.value,
         logoUrl: this.state.image,
         createdBy: this.props.user,
         createdAt: moment().format("MMMM Do YYYY, h:mm:ss a"),
       };
-      const p = new Problem(attributes);
+      const p = new Pool(attributes);
       await p.save();
-      this.setState({ modalMessage: "Create New Problem Success" });
+      this.setState({ modalMessage: "Create New Pool Success" });
       var _this = this;
       setTimeout(function () {
         _this.setState({ showModal: false, modalMessage: "" });
@@ -104,7 +103,7 @@ export default class CreateNewProblem extends Component {
                   <td>
                     <TextField
                       placeholder="请输入问题域题目"
-                      name="problem"
+                      name="Pool"
                       style={{ width: "100%" }}
                     ></TextField>
                   </td>
@@ -120,7 +119,7 @@ export default class CreateNewProblem extends Component {
                   </td>
                 </tr>
                 <tr>
-                  <td>是否加密</td>
+                  <td>是否公开</td>
                   <td>
                     <label className="switch">
                       <input type="checkbox" name="encrypt" />

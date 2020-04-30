@@ -1,10 +1,14 @@
-import { Model } from "radiks";
-import Comment from "./Comment";
-export default class Dataset extends Model {
-  static className = "Dataset";
-
+import { UserGroup } from "radiks";
+import Dataset from './Dataset';
+// as UserGroup
+export default class Pool extends UserGroup {
+  static className = "Pool";
   static schema = {
-    title: {
+    isPublic: {
+      type: Boolean,
+      decrypted: true,
+    },
+    name: {
       type: String,
       decrypted: true, // all users will know
     },
@@ -12,7 +16,10 @@ export default class Dataset extends Model {
       type: String,
       decrypted: true, // all users will know
     },
-    fileUrl: String, // publicUrl
+    logoUrl: {
+      type: String,
+      decrypted: true, // all users will know
+    },
     basics: {
       likes: {
         type: Number,
@@ -32,16 +39,19 @@ export default class Dataset extends Model {
       },
     },
     createdBy: String,
-    poolId: {
-      type: String,
-      decrypted: true,
-    },
   };
-  static defaults = {};
+  static defaults = {
+    basics:{
+      likes:0,
+      size:'0MB',
+      downloads:0,
+      comments:0
+    }
+  };
 
   async afterFetch() {
-    this.comments = await Comment.fetchList({
-      datasetId: this.id,
-    });
+    this.datasets = await Dataset.fetchList({
+      poolId: this.id,
+    })
   }
 }
