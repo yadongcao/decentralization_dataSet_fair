@@ -1,0 +1,13 @@
+[build]
+  # Directory to change to before starting a build.
+  # This is where we will look for package.json/.nvmrc/etc.
+  base = "app/"
+  publish = "/app/build/"
+
+  # Default build command.
+  command = "cd app && npm install && npm run build"
+
+[[headers]]
+for = "/*"
+[headers.values]
+Access-Control-Allow-Origin = "*"
